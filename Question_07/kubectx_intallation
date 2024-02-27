@@ -1,0 +1,7 @@
+sudo apt-get update
+sudo snap install kubectl --classic
+chmod  +x kubectx kubens
+sudo mv kubectx kubens /usr/local/bin
+snap list
+kubectx --help
+kubens --help 
