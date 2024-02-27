@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sim-web
+spec:
+  selector:
+    matchLabels:
+      app: simpleapp-webapp
+  template:
+    metadata:
+      labels:
+        app: simpleapp-webapp
+    spec:
+      initContainers:
+      - name: install
+        image: busybox:1.28
+        command:
+        - wget
+        - "-O"
+        - "/work-dir/index.html"
+        - http://info.cern.ch
+        volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      containers:
+      - name: sim-web
+        image: shaikhamann/cloudethix_initcontainer_amaan:v2
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: simple-volume
+          mountPath: /usr/share/nginx/html/
+        - name: workdir
+          mountPath: /work-dir
+      volumes:
+      - name: simple-volume
+        emptyDir: {}
+      - name: workdir
+        emptyDir: {}
+
+      

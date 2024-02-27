@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: master-deploy
+  labels:
+    app: master-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: master-nginx
+  template:
+    metadata:
+      labels:
+        app: master-nginx
+    spec:
+      containers:
+      - name: master-nginx
+        image: shaikhamann/cloudethix_master_nginx_amaan:v1
+        ports:
+        - containerPort: 80
+

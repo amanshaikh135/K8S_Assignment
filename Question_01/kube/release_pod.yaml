@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    app: release_nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: release_nginx
+  template:
+    metadata:
+      labels:
+        app: release_nginx
+    spec:
+      containers:
+      - name: release-nginx
+        image: shaikhamann/cloudethix_release_nginx_amaan:v1
+        ports:
+        - containerPort: 80

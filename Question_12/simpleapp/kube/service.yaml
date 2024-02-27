@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sim-web
+spec:
+  selector:
+    app: simpleapp-webapp
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31000  # Choose an available port here
+  type: NodePort
+
